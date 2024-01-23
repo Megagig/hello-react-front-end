@@ -1,22 +1,22 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
 const initialState = {
   greeting: '',
-  error: null,
-};
+  error: null
+}
 
 export const getGreetings = createAsyncThunk(
   'greetings/getGreetings',
   async () => {
     try {
-      const response = await fetch('http://127.0.0.1:3001/messages');
-      const data = await response.json();
-      return data.greeting;
+      const response = await fetch('http://127.0.0.1:3001/messages')
+      const data = await response.json()
+      return data.greeting
     } catch (error) {
-      return error.message;
+      return error.message
     }
   }
-);
+)
 
 const greetingsSlice = createSlice({
   name: 'greetings',
@@ -24,13 +24,13 @@ const greetingsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getGreetings.fulfilled, (state, action) => {
-      state.greeting = action.payload;
-    });
+      state.greeting = action.payload
+    })
     builder.addCase(getGreetings.rejected, (state, action) => {
-      state.error = action.error.message;
-    });
-  },
-});
+      state.error = action.error.message
+    })
+  }
+})
 
-export const { setGreeting } = greetingsSlice.actions;
-export default greetingsSlice.reducer;
+export const { setGreeting } = greetingsSlice.actions
+export default greetingsSlice.reducer
