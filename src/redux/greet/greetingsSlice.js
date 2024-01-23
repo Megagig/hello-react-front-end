@@ -11,7 +11,6 @@ export const getGreetings = createAsyncThunk(
       const response = await fetch('http://127.0.0.1:3001/messages');
       const data = await response.json();
       return data.greeting;
-      console.log(data);
     } catch (error) {
       return error.message;
     }
